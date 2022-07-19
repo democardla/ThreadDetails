@@ -3,20 +3,20 @@ package com.democardla.JavaCommunication;
 public class ProductAndCustomerTest {
     public static void main(String[] args) {
        Clerk clerk = new Clerk();
-       Thread productor = new Productor(clerk);
+       Thread producer = new Producer(clerk);
        Thread customer = new Customer(clerk);
-       productor.start();
+       producer.start();
        customer.start();
     }
 }
 
-class Productor extends Thread{
+class Producer extends Thread{
     Clerk Lock;
-    public Productor(Clerk clerk){
+    public Producer(Clerk clerk){
         Lock = clerk;
     }
 
-    public Productor() {
+    public Producer() {
     }
 
     @Override
@@ -33,11 +33,19 @@ class Productor extends Thread{
 //        }
 //        int account = Lock.account++;
 //        System.out.println("productor:" + account);
+        System.out.println("生产者开始生产！");
         while (true){
+            //这里是为了确保每个线程都有机会执行
+            try {
+                sleep(100);
+            } catch (Exception e ) {
+
+            }
             Lock.produce();
         }
     }
 }
+
 class Customer extends Thread{
     Clerk Lock;
     public Customer(Clerk clerk){
@@ -66,6 +74,7 @@ class Customer extends Thread{
         }
     }
 }
+
 class Clerk {
     private final int MAXIMUM = 20;
     int account = 0;
@@ -81,12 +90,14 @@ class Clerk {
         else
             return false;
     }
+    //生产产品
     public synchronized void produce(){
         if (!isFull()) {
             account++;
             System.out.println("Producing the " + account + " product.");
         }
     }
+    //消费产品
     public synchronized  void consume(){
         if (!isEmpty()){
             System.out.println("Consuming the " + account + " product.");
