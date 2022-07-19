@@ -26,11 +26,11 @@
 4。需要借助`FutureTask`类，比如取得返回结果
 
 ### 创建步骤：
-###### 1。创建实现Callable接口的类实例
-###### 2。 创建FutureTask类实例
-###### 3。 通过Thread构造器启动线程
+#### 1。创建实现Callable接口的类实例
+#### 2。 创建FutureTask类实例
+#### 3。 通过Thread构造器启动线程
     new  Thread(futureTask).start();
-###### 4。 **`get()`方法用来获得`FutureTask`构造器中的`Callable`实现类的重写call()的返回值。**
+#### 4。 **`get()`方法用来获得`FutureTask`构造器中的`Callable`实现类的重写call()的返回值。**
         try {
             Object sum = futureTask.get();
             System.out.println(sum);
@@ -46,9 +46,9 @@
 
 **优点：** 
 
-######1。提高了响应速度。
-######2。降低了资源消耗。
-######3。便于线程管理。
+####1。提高了响应速度。
+####2。降低了资源消耗。
+####3。便于线程管理。
 **参数：**
 
     corePoolSize:       核心池的大小
@@ -63,16 +63,16 @@
     
 ### 相关API：
 #### JDK5.0提供：`ExecutorService` 和 `Executors` 两个API
-######`ExecutorService`：真正线程池的接口。常见子类`ThreadPoolExecutor`
+#####`ExecutorService`：真正线程池的接口。常见子类`ThreadPoolExecutor`
     void execute(Runnable command):             执行任务/命令，没有返回值，一般用来执行Runnable
     <T> Future <T> submit(Callable<T> task):    执行任务，又返回值，一般用来执行Callable
     void shutdown():                            关闭连接池
-######`Executors`： 工具类线程池工厂，用来创建返回不同类型的线程池
+#####`Executors`： 工具类线程池工厂，用来创建返回不同类型的线程池
     Executors.newCachedThreadPool()         创建一个可以根据需要创建新线程的线程池
     Executors.newFixedThreadPool()          创建一个可以重用固定线程数池线程池
     Executors.newSingleThreadExecutor()     创建一个只有一个线程的线程池
     Executors.newScheduledThreadPool()      创建一个线程池，他可以安排在给定延迟后运行命令或者定期执行
-######使用：
+#####使用：
 
     ExecutorService service = Executors.newFixedThreadPool(nThreads: 10);
         service.execute(Runnable someRunnable);
