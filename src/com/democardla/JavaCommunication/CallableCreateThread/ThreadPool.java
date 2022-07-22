@@ -20,8 +20,6 @@ public class ThreadPool {
         //设置线程池的属性
         ThreadPoolExecutor se = (ThreadPoolExecutor) service;
         se.setCorePoolSize(15);
-
-
         service.execute(new ThreadCreatedByRunnable());
         service.shutdown();
 //        service.submit(new ThreadCreatedByCallable());
